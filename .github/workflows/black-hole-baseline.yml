@@ -1,0 +1,56 @@
+name: Black Hole baseline Android build
+
+on:
+  push:
+    branches:
+      - black-hole-dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: black-hole-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Compile official Candy 0.47.0 baseline
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out development branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699 # v4.0.1
+        with:
+          packages: platform-tools
+
+      - name: Install Android SDK platform 37.1
+        shell: bash
+        run: sdkmanager "platforms;android-37.1"
+
+      - name: Build separate-installable debug APK
+        shell: bash
+        run: |
+          ./gradlew --no-daemon --max-workers=2 \
+            -Pcandy.debugApplicationIdSuffix=.blackhole.baseline \
+            "-Pcandy.debugAppLabel=Black Hole Base Teste" \
+            :app:assembleFullDebug
+
+      - name: Upload debug APK for Android device testing
+        uses: actions/upload-artifact@v4
+        with:
+          name: black-hole-baseline-debug-apk
+          path: app/build/outputs/apk/full/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
