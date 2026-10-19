@@ -1,0 +1,64 @@
+name: Publish baseline APK for direct mobile download
+
+on:
+  push:
+    branches:
+      - black-hole-dev
+    paths:
+      - .github/workflows/publish-baseline-apk.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: black-hole-baseline-apk-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish APK from successful baseline build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Download verified build artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p /tmp/blackhole-artifact
+          gh run download 39109077724 \
+            --name black-hole-baseline-debug-apk \
+            --dir /tmp/blackhole-artifact
+
+      - name: Prepare direct APK asset
+        run: |
+          set -euo pipefail
+          mapfile -d '' apks < <(find /tmp/blackhole-artifact -type f -name '*.apk' -print0)
+          if [ "${#apks[@]}" -ne 1 ]; then
+            printf 'Expected exactly one APK; found %s\n' "${#apks[@]}"
+            exit 1
+          fi
+          mkdir -p /tmp/blackhole-publish
+          cp "${apks[0]}" /tmp/blackhole-publish/Black-Hole-Base-0.47.0-TESTE.apk
+          ls -lh /tmp/blackhole-publish/Black-Hole-Base-0.47.0-TESTE.apk
+
+      - name: Publish direct downloadable APK as private repository release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          TAG="black-hole-baseline-v0.47.0"
+          FILE="/tmp/blackhole-publish/Black-Hole-Base-0.47.0-TESTE.apk"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$FILE" --clobber
+          else
+            gh release create "$TAG" "$FILE" \
+              --target "${GITHUB_SHA}" \
+              --title "Black Hole Base 0.47.0 — APK de teste" \
+              --notes "APK de depuração da base Candy 0.47.0, preservada sem mudanças funcionais. Distribuição apenas para testes do Black Hole Browser, independentemente do Candy instalado. Não utilize senhas reais nesta versão experimental." \
+              --prerelease \
+              --latest=false
+          fi
