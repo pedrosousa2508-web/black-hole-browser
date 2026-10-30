@@ -55,6 +55,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Run full Play release unit tests
+      - name: Run full debug unit tests
         shell: bash
-        run: ./gradlew --no-daemon --max-workers=2 :app:testFullPlayReleaseUnitTest
+        run: ./gradlew --no-daemon --max-workers=2 :app:testFullDebugUnitTest
