@@ -43,7 +43,7 @@ jobs:
         shell: bash
         run: |
           ./gradlew --no-daemon --max-workers=2 \
-            -Pcandy.debugApplicationIdSuffix=.blackhole.baseline \
+            -Pcandy.debugApplicationIdSuffix=.baseline \
             "-Pcandy.debugAppLabel=Black Hole Base Teste" \
             :app:assembleFullDebug
 
@@ -54,3 +54,7 @@ jobs:
           path: app/build/outputs/apk/full/debug/*.apk
           if-no-files-found: error
           retention-days: 7
+
+      - name: Run full Play release unit tests
+        shell: bash
+        run: ./gradlew --no-daemon --max-workers=2 :app:testFullPlayReleaseUnitTest

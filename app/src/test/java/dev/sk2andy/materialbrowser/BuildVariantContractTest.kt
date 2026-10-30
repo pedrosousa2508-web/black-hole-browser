@@ -65,7 +65,7 @@ class BuildVariantContractTest {
         }
 
         assertEquals(
-            "dev.sk2andy.materialbrowser$flavorSuffix$buildTypeSuffix",
+            "com.pedrovoid.blackhole$flavorSuffix$buildTypeSuffix",
             BuildConfig.APPLICATION_ID,
         )
     }
