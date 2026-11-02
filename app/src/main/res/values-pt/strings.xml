@@ -1500,4 +1500,23 @@
     <string name="constellations_search">Pesquisar neste mapa</string>
     <string name="constellations_search_no_results">Nenhuma página correspondente neste perfil.</string>
     <string name="constellations_search_position">%1$d de %2$d resultados</string>
+
+    <!-- Importação CSV de senhas Black Hole (experimental, ainda sem AutoFill) -->
+    <string name="password_csv_group">Senhas (Black Hole)</string>
+    <string name="password_csv_action">Importar senhas (CSV)</string>
+    <string name="password_csv_summary">Escolha um CSV e confirme antes de salvar no cofre criptografado local. AutoFill ainda não está ligado; não há backup/exportação.</string>
+    <string name="password_csv_processing">Processando com segurança neste aparelho…</string>
+    <string name="password_csv_confirm_title">Importar senhas?</string>
+    <string name="password_csv_confirm_summary">%1$d registros válidos e %2$d linhas ignoradas. Importar só neste aparelho? Senhas existentes não serão substituídas. Ainda não há backup/exportação; use senhas de teste.</string>
+    <string name="password_csv_import_confirm">Importar</string>
+    <string name="password_csv_cancel">Cancelar</string>
+    <string name="password_csv_no_valid">Nenhuma senha HTTPS compatível encontrada.</string>
+    <string name="password_csv_invalid_format">Formato CSV inválido ou não compatível.</string>
+    <string name="password_csv_invalid_utf8">O CSV precisa estar em UTF-8.</string>
+    <string name="password_csv_too_large">CSV muito grande (máximo de 2 MB).</string>
+    <string name="password_csv_unreadable">Não foi possível ler o arquivo escolhido.</string>
+    <string name="password_csv_limit">Limite do cofre atingido; nada foi alterado.</string>
+    <string name="password_csv_storage_error">Não foi possível abrir ou salvar o cofre criptografado. Nenhuma mudança foi feita.</string>
+    <string name="password_csv_imported_notice">Importação concluída. AutoFill ainda não está conectado ao cofre.</string>
+    <string name="password_csv_import_result">Novos registros: %1$d · ignorados: %2$d</string>
 </resources>

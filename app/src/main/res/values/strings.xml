@@ -1523,4 +1523,23 @@
     <string name="constellations_search">Search this map</string>
     <string name="constellations_search_no_results">No matching pages in this profile.</string>
     <string name="constellations_search_position">%1$d of %2$d matches</string>
+
+    <!-- Black Hole password CSV import (experimental, no autofill integration yet) -->
+    <string name="password_csv_group">Passwords (Black Hole)</string>
+    <string name="password_csv_action">Import passwords (CSV)</string>
+    <string name="password_csv_summary">Select a CSV file. A confirmation is required before saving to the encrypted local vault. Autofill is not linked yet; backup/export is not available.</string>
+    <string name="password_csv_processing">Processing securely on this device…</string>
+    <string name="password_csv_confirm_title">Import passwords?</string>
+    <string name="password_csv_confirm_summary">%1$d valid entries and %2$d skipped rows. Import to this device only? Existing logins will not be replaced. No backup/export exists yet, so use test credentials.</string>
+    <string name="password_csv_import_confirm">Import</string>
+    <string name="password_csv_cancel">Cancel</string>
+    <string name="password_csv_no_valid">No supported HTTPS login entries found.</string>
+    <string name="password_csv_invalid_format">Unsupported or malformed CSV format.</string>
+    <string name="password_csv_invalid_utf8">The CSV must use UTF-8 encoding.</string>
+    <string name="password_csv_too_large">CSV is too large (2 MB maximum).</string>
+    <string name="password_csv_unreadable">Could not read the selected file.</string>
+    <string name="password_csv_limit">Vault limit reached; nothing was changed.</string>
+    <string name="password_csv_storage_error">Could not unlock or save the encrypted vault. No changes were made.</string>
+    <string name="password_csv_imported_notice">Import completed. Autofill is not connected to this vault yet.</string>
+    <string name="password_csv_import_result">New entries: %1$d · skipped: %2$d</string>
 </resources>
