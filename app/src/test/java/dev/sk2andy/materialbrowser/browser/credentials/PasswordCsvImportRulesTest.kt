@@ -20,11 +20,8 @@ class PasswordCsvImportRulesTest {
 
     @Test
     fun firefoxCsvSupportsEscapedQuotesAndMultilinePasswords() {
-        val csv = """
-            url,username,password,httpRealm
-            https://example.org/path,bob,"line1
-            line2 with ""quote""",
-        """.trimIndent()
+        val csv = "url,username,password,httpRealm\n" +
+            "https://example.org/path,bob,\"line1\nline2 with \"\"quote\"\"\",\n"
         val result = PasswordCsvImportRules.parse(csv) as PasswordCsvImportResult.Parsed
         assertEquals(1, result.entries.size)
         assertEquals("line1\nline2 with \"quote\"", result.entries.single().login.password)
