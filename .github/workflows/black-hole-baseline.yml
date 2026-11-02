@@ -43,14 +43,14 @@ jobs:
         shell: bash
         run: |
           ./gradlew --no-daemon --max-workers=2 \
-            -Pcandy.debugApplicationIdSuffix=.baseline \
-            "-Pcandy.debugAppLabel=Black Hole Base Teste" \
+            -Pcandy.debugApplicationIdSuffix=.csvtest \
+            "-Pcandy.debugAppLabel=Black Hole CSV Teste" \
             :app:assembleFullDebug
 
       - name: Upload debug APK for Android device testing
         uses: actions/upload-artifact@v4
         with:
-          name: black-hole-baseline-debug-apk
+          name: black-hole-csvtest-debug-apk
           path: app/build/outputs/apk/full/debug/*.apk
           if-no-files-found: error
           retention-days: 7
