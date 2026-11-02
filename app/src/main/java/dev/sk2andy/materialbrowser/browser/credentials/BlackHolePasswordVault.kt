@@ -76,7 +76,13 @@ internal class BlackHolePasswordVault(context: Context) {
 
     /** Null means unreadable/corrupt ciphertext. Never interpret it as an empty vault. */
     private fun load(): List<ImportedPassword>? {
-        if (!file.baseFile.exists()) return emptyList()
+        // AtomicFile may keep the previous valid vault as .bak during an interrupted write.
+        // Never overwrite it by assuming an absent base file means an empty vault.
+        val base = file.baseFile
+        if (!base.exists() &&
+            !File(base.path + ".bak").exists() &&
+            !File(base.path + ".new").exists()
+        ) return emptyList()
         val encrypted = file.openRead().use { input ->
             val bytes = input.readBytes()
             require(bytes.size in (HEADER.size + 12 + 16)..PasswordVaultCodec.MAX_PLAINTEXT_BYTES)
