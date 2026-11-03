@@ -1,4 +1,4 @@
-name: Black Hole branding Android test
+name: Black Hole password vault Android test
 
 on:
   push:
@@ -10,12 +10,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: black-hole-brandtest-${{ github.ref }}
+  group: black-hole-vaulttest-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Compile Black Hole branded debug APK
+    name: Compile Black Hole authenticated vault debug APK
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -43,14 +43,14 @@ jobs:
         shell: bash
         run: |
           ./gradlew --no-daemon --max-workers=2 \
-            -Pcandy.debugApplicationIdSuffix=.brandtest \
-            "-Pcandy.debugAppLabel=Black Hole Visual Teste" \
+            -Pcandy.debugApplicationIdSuffix=.vaulttest \
+            "-Pcandy.debugAppLabel=Black Hole Senhas Teste" \
             :app:assembleFullDebug
 
       - name: Upload debug APK for Android device testing
         uses: actions/upload-artifact@v4
         with:
-          name: black-hole-brandtest-debug-apk
+          name: black-hole-vaulttest-debug-apk
           path: app/build/outputs/apk/full/debug/*.apk
           if-no-files-found: error
           retention-days: 7
