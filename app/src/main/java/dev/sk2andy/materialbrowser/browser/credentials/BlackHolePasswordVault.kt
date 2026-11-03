@@ -11,12 +11,12 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
-/** App-private encrypted storage, excluded from Android backup and device transfer. */
 /** Account metadata only; its string form never exposes the site or username. */
 internal class VaultAccount(val origin: String, val username: String) {
     override fun toString(): String = "VaultAccount(<redacted>)"
 }
 
+/** App-private encrypted storage, excluded from Android backup and device transfer. */
 internal class BlackHolePasswordVault(context: Context) {
     private val file = AtomicFile(File(context.applicationContext.noBackupFilesDir, "black_hole_passwords_v1.enc"))
 
@@ -30,8 +30,9 @@ internal class BlackHolePasswordVault(context: Context) {
      * Imports only explicit user-approved rows. Existing (origin, username) pairs are NEVER
      * replaced by CSV, and read/decrypt errors NEVER overwrite the existing encrypted vault.
      */
-    fun importApproved(rows: List<ImportedPassword>): ImportResult = synchronized(STORAGE_LOCK) {
-        if (rows.isEmpty()) return ImportResult.Saved(0, 0, 0)
+    fun importApproved(rows: List<ImportedPassword>): ImportResult {
+        return synchronized(STORAGE_LOCK) {
+            if (rows.isEmpty()) return ImportResult.Saved(0, 0, 0)
         return try {
             val existing = load() ?: return ImportResult.StorageError
             val known = existing.mapTo(HashSet()) { it.origin to it.login.username }
@@ -55,6 +56,7 @@ internal class BlackHolePasswordVault(context: Context) {
         } catch (_: Exception) {
             // No logs here: CSV contents and crypto/IO exceptions may contain sensitive data.
             ImportResult.StorageError
+            }
         }
     }
 
