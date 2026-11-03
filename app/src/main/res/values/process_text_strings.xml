@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="process_text_research">Research in Candy</string>
-    <string name="process_text_read_aloud">Read aloud with Candy</string>
+    <string name="process_text_research">Research in Black Hole</string>
+    <string name="process_text_read_aloud">Read aloud with Black Hole</string>
     <string name="process_text_choose_profile">Choose the regular profile for this search.</string>
     <string name="process_text_research_profile">Research in %1$s</string>
     <string name="process_text_no_profiles">No available regular profile. Protected and synced profiles are excluded.</string>

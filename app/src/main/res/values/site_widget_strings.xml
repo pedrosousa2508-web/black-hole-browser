@@ -3,7 +3,7 @@
     <string name="site_widget_name">Website crop (prototype)</string>
     <string name="site_widget_name_square">Website crop 4×4 (prototype)</string>
     <string name="site_widget_description">Keep a selected website area on your home screen</string>
-    <string name="site_widget_empty">Open a page in Candy, then tap here to select an area.</string>
+    <string name="site_widget_empty">Open a page in Black Hole, then tap here to select an area.</string>
     <string name="site_widget_open">Open page</string>
     <string name="site_widget_refresh">Refresh</string>
     <string name="site_widget_unavailable">This page cannot be saved as a widget. Use a regular, unprotected local profile.</string>
@@ -15,10 +15,10 @@
     <string name="site_widget_format_four_by_four">4 × 4</string>
     <string name="site_widget_editor_size">Selection size</string>
     <string name="site_widget_editor_pin">Add to home screen</string>
-    <string name="site_widget_editor_interaction_hint">The widget shows a snapshot. Tap it to open the page in Candy.</string>
+    <string name="site_widget_editor_interaction_hint">The widget shows a snapshot. Tap it to open the page in Black Hole.</string>
     <string name="site_widget_private_unavailable">Website widgets are unavailable in private tabs.</string>
     <string name="site_widget_capture_failed">Could not capture this page. Try again when it has finished loading.</string>
-    <string name="site_widget_pin_unavailable">This launcher does not support adding widgets directly. Add the Candy website widget from its widget picker.</string>
+    <string name="site_widget_pin_unavailable">This launcher does not support adding widgets directly. Add the Black Hole website widget from its widget picker.</string>
     <string name="site_widget_save_failed">Could not save this widget. Please try again.</string>
     <string name="site_widget_reselect">Edit crop</string>
     <string name="site_widget_refresh_failed">Refresh failed. The last snapshot is still shown.</string>

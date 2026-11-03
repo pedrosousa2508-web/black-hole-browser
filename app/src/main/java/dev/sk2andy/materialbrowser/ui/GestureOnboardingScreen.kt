@@ -1117,7 +1117,7 @@ private fun FakeAddressBar(modifier: Modifier = Modifier) {
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
-                text = "candy://gestures",
+                text = "blackhole://gestures",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -1135,7 +1135,7 @@ private fun MiniTabCard(modifier: Modifier = Modifier) {
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Candy",
+                text = "Black Hole",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )

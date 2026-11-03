@@ -16,7 +16,7 @@
     <string name="link_routing_reader">Reader Studio</string>
     <string name="link_routing_capsule">Site Capsule</string>
     <string name="link_routing_save">Save rule</string>
-    <string name="link_routing_boundaries">Applies to web links Android sends to Candy. Private tabs keep their normal behavior. Protected and synced profiles are unavailable as automatic destinations.</string>
+    <string name="link_routing_boundaries">Applies to web links Android sends to Black Hole. Private tabs keep their normal behavior. Protected and synced profiles are unavailable as automatic destinations.</string>
     <string name="link_routing_target_missing">Destination unavailable</string>
     <string name="link_routing_target_unavailable">This link rule cannot open its destination. Update the rule in Settings.</string>
     <string name="link_routing_save_failed">Link rules could not be saved.</string>

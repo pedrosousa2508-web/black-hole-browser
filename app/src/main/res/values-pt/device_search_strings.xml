@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="device_search_title">Pesquisa no dispositivo</string>
+    <string name="device_search_settings_summary">Escolha favoritos e artigos salvos para a busca do Android</string>
+    <string name="device_search_summary">Escolha favoritos e artigos salvos para aparecer na pesquisa do sistema. O histórico e o texto dos artigos continuam no Black Hole. Conteúdos privados e perfis protegidos ficam de fora.</string>
+    <string name="device_search_enable">Compartilhar com a pesquisa do dispositivo</string>
+    <string name="device_search_enable_summary">Somente os itens selecionados serão compartilhados. Desativar remove os itens do índice.</string>
+    <string name="device_search_launcher_note">Os resultados aparecem apenas em launchers ou buscas que suportem o Android AppSearch. A disponibilidade depende do aparelho.</string>
+    <string name="device_search_bookmark_profile">Abrir favoritos neste perfil</string>
+    <string name="device_search_bookmarks">Favoritos</string>
+    <string name="device_search_articles">Artigos salvos</string>
+    <string name="device_search_empty">Nenhum item disponível. Artigos salvos exigem um perfil local conhecido e sem proteção.</string>
+    <string name="device_search_saving">Atualizando a pesquisa do dispositivo…</string>
+    <string name="device_search_failed">Não foi possível atualizar a pesquisa do dispositivo. Tente mudar a seleção novamente.</string>
+    <string name="device_search_item_unavailable">Este item não está mais disponível ou compartilhado.</string>
+    <string name="device_search_open">Abrir no Black Hole</string>
+</resources>

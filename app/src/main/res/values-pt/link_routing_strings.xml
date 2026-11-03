@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="link_routing_title">Regras pessoais para links</string>
+    <string name="link_routing_summary">Escolha onde abrir links recebidos de outros apps. A primeira regra ativada que corresponder será usada.</string>
+    <string name="link_routing_add">Adicionar regra</string>
+    <string name="link_routing_empty">Nenhuma regra ainda. Adicione um domínio e escolha um perfil, Reader Studio ou Site Capsule.</string>
+    <string name="link_routing_edit">Editar regra de link</string>
+    <string name="link_routing_delete">Excluir regra</string>
+    <string name="link_routing_move_up">Prioridade maior</string>
+    <string name="link_routing_move_down">Prioridade menor</string>
+    <string name="link_routing_domain">Domínio sem https://</string>
+    <string name="link_routing_subdomains">Incluir subdomínios</string>
+    <string name="link_routing_subdomains_summary">Também corresponde a endereços como www.exemplo.com.</string>
+    <string name="link_routing_target">Abrir com</string>
+    <string name="link_routing_destination">Destino</string>
+    <string name="link_routing_profile">Perfil</string>
+    <string name="link_routing_reader">Reader Studio</string>
+    <string name="link_routing_capsule">Site Capsule</string>
+    <string name="link_routing_save">Salvar regra</string>
+    <string name="link_routing_boundaries">Aplica-se aos links que o Android envia ao Black Hole. Abas privadas mantêm seu comportamento normal. Perfis protegidos ou sincronizados não podem ser destinos automáticos.</string>
+    <string name="link_routing_target_missing">Destino indisponível</string>
+    <string name="link_routing_target_unavailable">Esta regra não consegue abrir o destino. Atualize a regra nas configurações.</string>
+    <string name="link_routing_save_failed">Não foi possível salvar as regras de links.</string>
+</resources>
