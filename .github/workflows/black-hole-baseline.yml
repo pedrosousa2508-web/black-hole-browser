@@ -1,4 +1,4 @@
-name: Black Hole baseline Android build
+name: Black Hole branding Android test
 
 on:
   push:
@@ -10,12 +10,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: black-hole-baseline-${{ github.ref }}
+  group: black-hole-brandtest-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Compile official Candy 0.47.0 baseline
+    name: Compile Black Hole branded debug APK
     runs-on: ubuntu-latest
     timeout-minutes: 45
 
@@ -43,14 +43,14 @@ jobs:
         shell: bash
         run: |
           ./gradlew --no-daemon --max-workers=2 \
-            -Pcandy.debugApplicationIdSuffix=.csvtest \
-            "-Pcandy.debugAppLabel=Black Hole CSV Teste" \
+            -Pcandy.debugApplicationIdSuffix=.brandtest \
+            "-Pcandy.debugAppLabel=Black Hole Visual Teste" \
             :app:assembleFullDebug
 
       - name: Upload debug APK for Android device testing
         uses: actions/upload-artifact@v4
         with:
-          name: black-hole-csvtest-debug-apk
+          name: black-hole-brandtest-debug-apk
           path: app/build/outputs/apk/full/debug/*.apk
           if-no-files-found: error
           retention-days: 7
