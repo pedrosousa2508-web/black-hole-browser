@@ -452,6 +452,8 @@ internal fun ProtectionAndDataSettingsPage(
         SettingsSectionTitle(stringResource(R.string.password_csv_group))
         Spacer(Modifier.height(8.dp))
         PasswordCsvImportAction()
+        Spacer(Modifier.height(8.dp))
+        PasswordVaultManagerAction()
         Spacer(Modifier.height(18.dp))
         SettingsSectionTitle(stringResource(R.string.settings_protection_group_app_data))
         Spacer(Modifier.height(8.dp))

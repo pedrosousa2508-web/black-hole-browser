@@ -1542,4 +1542,27 @@
     <string name="password_csv_storage_error">Could not unlock or save the encrypted vault. No changes were made.</string>
     <string name="password_csv_imported_notice">Import completed. Autofill is not connected to this vault yet.</string>
     <string name="password_csv_import_result">New entries: %1$d · skipped: %2$d</string>
+
+    <!-- P5.6: Password manager. Reading and deletion are authenticated on every action. -->
+    <string name="bh_vault_manage">Manage saved passwords</string>
+    <string name="bh_vault_manage_desc">View and delete locally imported accounts after Android authentication. Autofill is not supported yet.</string>
+    <string name="bh_vault_title">Black Hole password vault</string>
+    <string name="bh_vault_unlocking">Authenticate with your phone to view the saved accounts.</string>
+    <string name="bh_vault_empty">No accounts saved in this test installation. Import a test CSV first.</string>
+    <string name="bh_vault_error">The encrypted vault could not be read. No data was changed.</string>
+    <string name="bh_vault_auth_unavailable">Set up a strong biometric or screen lock on this phone to unlock the vault.</string>
+    <string name="bh_vault_auth_failed">Authentication not completed. Vault remains locked.</string>
+    <string name="bh_vault_auth_title">Black Hole passwords</string>
+    <string name="bh_vault_auth_subtitle">Confirm your identity to access saved passwords</string>
+    <string name="bh_vault_reveal">Reveal password</string>
+    <string name="bh_vault_hide">Hide password</string>
+    <string name="bh_vault_delete">Delete account</string>
+    <string name="bh_vault_delete_title">Delete this saved account?</string>
+    <string name="bh_vault_delete_body">This action permanently removes the selected login from the encrypted vault. It cannot be restored in this test version.</string>
+    <string name="bh_vault_delete_success">Saved account removed.</string>
+    <string name="bh_vault_delete_failed">Could not delete this account. Nothing was changed.</string>
+    <string name="bh_vault_reveal_failed">Could not read this password.</string>
+    <string name="bh_vault_close">Close and lock</string>
+    <string name="bh_vault_cancel">Cancel</string>
+    <string name="bh_vault_auth_required">Authenticate again to reveal or delete a password.</string>
 </resources>

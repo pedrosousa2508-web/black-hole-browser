@@ -12,6 +12,11 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 /** App-private encrypted storage, excluded from Android backup and device transfer. */
+/** Account metadata only; its string form never exposes the site or username. */
+internal class VaultAccount(val origin: String, val username: String) {
+    override fun toString(): String = "VaultAccount(<redacted>)"
+}
+
 internal class BlackHolePasswordVault(context: Context) {
     private val file = AtomicFile(File(context.applicationContext.noBackupFilesDir, "black_hole_passwords_v1.enc"))
 
@@ -25,8 +30,7 @@ internal class BlackHolePasswordVault(context: Context) {
      * Imports only explicit user-approved rows. Existing (origin, username) pairs are NEVER
      * replaced by CSV, and read/decrypt errors NEVER overwrite the existing encrypted vault.
      */
-    @Synchronized
-    fun importApproved(rows: List<ImportedPassword>): ImportResult {
+    fun importApproved(rows: List<ImportedPassword>): ImportResult = synchronized(STORAGE_LOCK) {
         if (rows.isEmpty()) return ImportResult.Saved(0, 0, 0)
         return try {
             val existing = load() ?: return ImportResult.StorageError
@@ -46,31 +50,75 @@ internal class BlackHolePasswordVault(context: Context) {
             if (existing.size + additions.size > PasswordVaultCodec.MAX_ENTRIES) {
                 return ImportResult.LimitReached
             }
-            if (additions.isNotEmpty()) {
-                val plaintext = PasswordVaultCodec.encode(existing + additions)
-                try {
-                    val cipher = Cipher.getInstance("AES/GCM/NoPadding")
-                    cipher.init(Cipher.ENCRYPT_MODE, key())
-                    val ciphertext = cipher.doFinal(plaintext)
-                    val iv = cipher.iv
-                    require(iv.size == 12)
-                    val envelope = HEADER + iv + ciphertext
-                    val output = file.startWrite()
-                    try {
-                        output.write(envelope)
-                        file.finishWrite(output)
-                    } catch (error: Exception) {
-                        file.failWrite(output)
-                        throw error
-                    }
-                } finally {
-                    plaintext.fill(0)
-                }
-            }
+            if (additions.isNotEmpty()) save(existing + additions)
             ImportResult.Saved(additions.size, duplicates, existing.size + additions.size)
         } catch (_: Exception) {
             // No logs here: CSV contents and crypto/IO exceptions may contain sensitive data.
             ImportResult.StorageError
+        }
+    }
+
+    /** This API must be called only after a fresh Android BiometricPrompt authorization. */
+    fun listAccounts(): List<VaultAccount>? = synchronized(STORAGE_LOCK) {
+        try {
+            load()?.map { VaultAccount(it.origin, it.login.username) }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** A separate fresh authorization is required before the UI invokes this method. */
+    fun revealPassword(account: VaultAccount): String? = synchronized(STORAGE_LOCK) {
+        try {
+            load()?.firstOrNull {
+                it.origin == account.origin && it.login.username == account.username
+            }?.login?.password
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    internal sealed interface DeleteResult {
+        data object Deleted : DeleteResult
+        data object NotFound : DeleteResult
+        data object StorageError : DeleteResult
+    }
+
+    /** Only called after a separate biometric/lock-screen prompt and explicit confirmation. */
+    fun deleteAccount(account: VaultAccount): DeleteResult = synchronized(STORAGE_LOCK) {
+        try {
+            val existing = load() ?: return@synchronized DeleteResult.StorageError
+            val remaining = existing.filterNot {
+                it.origin == account.origin && it.login.username == account.username
+            }
+            if (remaining.size == existing.size) return@synchronized DeleteResult.NotFound
+            save(remaining)
+            DeleteResult.Deleted
+        } catch (_: Exception) {
+            DeleteResult.StorageError
+        }
+    }
+
+    /** Atomic replacement; callers already own STORAGE_LOCK. */
+    private fun save(records: List<ImportedPassword>) {
+        val plaintext = PasswordVaultCodec.encode(records)
+        try {
+            val cipher = Cipher.getInstance("AES/GCM/NoPadding")
+            cipher.init(Cipher.ENCRYPT_MODE, key())
+            val ciphertext = cipher.doFinal(plaintext)
+            val iv = cipher.iv
+            require(iv.size == 12)
+            val envelope = HEADER + iv + ciphertext
+            val output = file.startWrite()
+            try {
+                output.write(envelope)
+                file.finishWrite(output)
+            } catch (error: Exception) {
+                file.failWrite(output)
+                throw error
+            }
+        } finally {
+            plaintext.fill(0)
         }
     }
 
@@ -121,5 +169,6 @@ internal class BlackHolePasswordVault(context: Context) {
     private companion object {
         val HEADER = byteArrayOf(0x42, 0x48, 0x50, 0x57, 0x01) // BHPW + version 1
         const val KEY_ALIAS = "black_hole_password_vault_v1"
+        val STORAGE_LOCK = Any()
     }
 }

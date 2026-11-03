@@ -1519,4 +1519,27 @@
     <string name="password_csv_storage_error">Não foi possível abrir ou salvar o cofre criptografado. Nenhuma mudança foi feita.</string>
     <string name="password_csv_imported_notice">Importação concluída. AutoFill ainda não está conectado ao cofre.</string>
     <string name="password_csv_import_result">Novos registros: %1$d · ignorados: %2$d</string>
+
+    <!-- P5.6: Gerenciador de senhas com verificação de identidade por ação. -->
+    <string name="bh_vault_manage">Gerenciar senhas salvas</string>
+    <string name="bh_vault_manage_desc">Veja ou exclua contas importadas após autenticação no Android. O AutoFill ainda não foi integrado.</string>
+    <string name="bh_vault_title">Cofre de senhas Black Hole</string>
+    <string name="bh_vault_unlocking">Confirme sua identidade no celular para visualizar as contas salvas.</string>
+    <string name="bh_vault_empty">Nenhuma conta neste aplicativo de teste. Importe primeiro um CSV fictício.</string>
+    <string name="bh_vault_error">Não foi possível ler o cofre criptografado. Nenhum dado foi alterado.</string>
+    <string name="bh_vault_auth_unavailable">Configure biometria forte ou bloqueio de tela neste celular para abrir o cofre.</string>
+    <string name="bh_vault_auth_failed">Autenticação não concluída. O cofre continua bloqueado.</string>
+    <string name="bh_vault_auth_title">Senhas Black Hole</string>
+    <string name="bh_vault_auth_subtitle">Confirme sua identidade para acessar as senhas</string>
+    <string name="bh_vault_reveal">Mostrar senha</string>
+    <string name="bh_vault_hide">Ocultar senha</string>
+    <string name="bh_vault_delete">Excluir conta</string>
+    <string name="bh_vault_delete_title">Excluir esta conta salva?</string>
+    <string name="bh_vault_delete_body">A conta selecionada será removida permanentemente do cofre criptografado. Esta versão de teste ainda não permite recuperá-la.</string>
+    <string name="bh_vault_delete_success">Conta salva excluída.</string>
+    <string name="bh_vault_delete_failed">Não foi possível excluir a conta. Nenhum dado foi alterado.</string>
+    <string name="bh_vault_reveal_failed">Não foi possível consultar esta senha.</string>
+    <string name="bh_vault_close">Fechar e bloquear</string>
+    <string name="bh_vault_cancel">Cancelar</string>
+    <string name="bh_vault_auth_required">Confirme novamente sua identidade para mostrar ou excluir uma senha.</string>
 </resources>
